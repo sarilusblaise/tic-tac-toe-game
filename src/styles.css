@@ -18,6 +18,7 @@
     --clr-primary-10: hsl(205, 100%, 96%);
     /* darkest grey - used for headings */
     --dark-bg: #1d2a35;
+    --clr-grey-0:#282c34;
     --clr-grey-1: hsl(209, 61%, 16%);
     --clr-grey-2: hsl(211, 39%, 23%);
     --clr-grey-3: hsl(209, 34%, 30%);
@@ -60,7 +61,7 @@ body {
     font-family: sans-serif;
     margin: 20px;
     padding: 0;
-    background-color: var(--clr-black);
+    background-color: var(--clr-grey-0);
     color: var(--clr-grey-5);
 }
 
