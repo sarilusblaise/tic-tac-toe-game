@@ -13,11 +13,16 @@ when there is winner : this concept call lifting state in react : that means the
 of one or more child is store in a the parent component.*/
 export default function Board() {
 	const [squares, setSquares] = useState(Array(9).fill(null));
+	const [xIsNext, setXIsNext] = useState(true);
 	function handleClick(i) {
-		let nextSquares = squares.slice();
-		nextSquares[i] = "X";
+		const nextSquares = squares.slice();
+		if (xIsNext) {
+			nextSquares[i] = "X";
+		} else {
+			nextSquares[i] = "O";
+		}
 		setSquares(nextSquares);
-		console.log(nextSquares);
+		setXIsNext(!xIsNext);
 	}
 
 	return (
