@@ -8,14 +8,44 @@ function Square({ value, onSquareClick }) {
 	);
 }
 
-/* component keep all the square and allow them to communicate each other in to determine 
-when there is winner : this concept call lifting state in react : that means the state 
-of one or more child is store in a the parent component.*/
+//component keep all the squares and allow them to communicate each other in order to determine
+//when there is winner : this concept call lifting state in react : that means the state
+//of one or more child is store in a the parent component.
 export default function Board() {
 	const [squares, setSquares] = useState(Array(9).fill(null));
 	const [xIsNext, setXIsNext] = useState(true);
+	const winner = calculateWinner(squares);
+	let status;
+
+	if (winner) {
+		status = "Winner: " + winner;
+	} else {
+		status = "Next player: " + (xIsNext ? "X" : "O");
+	}
+
+	function calculateWinner(arr) {
+		const lines = [
+			[0, 1, 2],
+			[3, 4, 5],
+			[6, 7, 8],
+			[0, 3, 6],
+			[1, 4, 7],
+			[2, 5, 8],
+			[0, 4, 8],
+			[2, 4, 6],
+		];
+
+		for (let line of lines) {
+			const [a, b, c] = line;
+			if (arr[a] && arr[a] === arr[b] && arr[a] === arr[c]) {
+				return arr[a];
+			}
+		}
+
+		return null;
+	}
 	function handleClick(i) {
-		if (squares[i]) {
+		if (squares[i] || winner) {
 			return;
 		}
 		const nextSquares = squares.slice();
@@ -30,6 +60,7 @@ export default function Board() {
 
 	return (
 		<>
+			<div className='status'>{status}</div>
 			<div className='board-row'>
 				<Square value={squares[0]} onSquareClick={() => handleClick(0)} />
 				<Square value={squares[1]} onSquareClick={() => handleClick(1)} />
