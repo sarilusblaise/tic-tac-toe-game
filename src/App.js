@@ -11,9 +11,7 @@ function Square({ value, onSquareClick }) {
 //component keep all the squares and allow them to communicate each other in order to determine
 //when there is winner : this concept call lifting state in react : that means the state
 //of one or more child is store in a the parent component.
-function Board() {
-	const [squares, setSquares] = useState(Array(9).fill(null));
-	const [xIsNext, setXIsNext] = useState(true);
+function Board({ xIsNext, squares, onPlay }) {
 	const winner = calculateWinner(squares);
 	let status;
 
@@ -81,10 +79,14 @@ function Board() {
 }
 
 export default function Game() {
+	const [xIsNext, setXIsNext] = useState(true);
+	const [history, setHistory] = useState([Array(9).fill(null)]);
+	const currentSquares = history[history.length - 1];
+	function handlePlay(nextSquares) {}
 	return (
 		<div className='game'>
 			<div className='game-board'>
-				<Board />
+				<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
 			</div>
 			<div className='game-info'>
 				<ol>{/*TODO*/}</ol>
