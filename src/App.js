@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { AiFillForward } from "react-icons/ai";
 import { AiFillBackward } from "react-icons/ai";
-import { mouseCartoon } from "../mouseCartoon.png";
+import mouseCartoon from "./mouseCartoon.png";
+
 //square component represent the container for the move of each player.
 function Square({ value, onSquareClick }) {
 	return (
@@ -112,7 +113,6 @@ export default function Game() {
 
 	return (
 		<div className='game'>
-			<img src={mouseCartoon} alt='' />
 			<div className='game-board'>
 				<div className='players'>
 					<div className='player'>Player X</div>{" "}
@@ -127,9 +127,9 @@ export default function Game() {
 						<AiFillForward className='undo-btn' /> <p>forward</p>
 					</div>
 				</div>
-			</div>
-			<div className='game-info'>
-				<ol>{moves}</ol>
+				<div className='game-info'>
+					<ol>{moves}</ol>
+				</div>
 			</div>
 		</div>
 	);

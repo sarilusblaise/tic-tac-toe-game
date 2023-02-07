@@ -169,6 +169,7 @@ font-size: 2rem;
     width: 100vw;
     min-height: 100vh;
     background-color: var(--clr-grey-1);
+    gap: 2rem;
 }
 
 .game-info {
