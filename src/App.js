@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { AiFillForward } from "react-icons/ai";
+import { AiFillBackward } from "react-icons/ai";
 //square component represent the container for the move of each player.
 function Square({ value, onSquareClick }) {
 	return (
@@ -110,7 +112,19 @@ export default function Game() {
 	return (
 		<div className='game'>
 			<div className='game-board'>
+				<div className='players'>
+					<div className='player'>Player X</div>{" "}
+					<div className='player'>Player O</div>
+				</div>
 				<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+				<div className='game-undo'>
+					<div className='undo-container'>
+						<AiFillBackward className='undo-btn' /> <p>back</p>
+					</div>
+					<div className='undo-container'>
+						<AiFillForward className='undo-btn' /> <p>forward</p>
+					</div>
+				</div>
 			</div>
 			<div className='game-info'>
 				<ol>{moves}</ol>
