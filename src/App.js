@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { AiFillForward } from "react-icons/ai";
 import { AiFillBackward } from "react-icons/ai";
+import { AiOutlineUndo } from "react-icons/ai";
+import { AiOutlineRedo } from "react-icons/ai";
 import mouseCartoon from "./mouseCartoon.png";
 
 //square component represent the container for the move of each player.
@@ -9,6 +11,39 @@ function Square({ value, onSquareClick }) {
 		<button className='square' onClick={onSquareClick}>
 			{value}
 		</button>
+	);
+}
+
+function GameTimer() {
+	return (
+		<div className='players'>
+			<div className='player'>
+				<p>
+					Player X <span className='timer'> 5:30</span>
+				</p>
+			</div>
+			<div className='player'>
+				<p>
+					Player O <span className='timer'> 5:30</span>
+				</p>
+			</div>
+		</div>
+	);
+}
+
+function GameControl() {
+	return (
+		<>
+			<div className='game-undo'>
+				<div className='undo-container'>
+					<AiOutlineUndo className='undo-btn' /> <p>undo</p>
+				</div>
+				<div className='reset undo-container'>reset</div>
+				<div className='undo-container'>
+					<AiOutlineRedo className='undo-btn' /> <p>redo</p>
+				</div>
+			</div>
+		</>
 	);
 }
 
@@ -113,20 +148,13 @@ export default function Game() {
 
 	return (
 		<div className='game'>
+			<header>
+				<h1>Tic tac toe game</h1>
+			</header>
 			<div className='game-board'>
-				<div className='players'>
-					<div className='player'>Player X</div>{" "}
-					<div className='player'>Player O</div>
-				</div>
+				<GameTimer />
 				<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-				<div className='game-undo'>
-					<div className='undo-container'>
-						<AiFillBackward className='undo-btn' /> <p>back</p>
-					</div>
-					<div className='undo-container'>
-						<AiFillForward className='undo-btn' /> <p>forward</p>
-					</div>
-				</div>
+				<GameControl />
 				<div className='game-info'>
 					<ol>{moves}</ol>
 				</div>

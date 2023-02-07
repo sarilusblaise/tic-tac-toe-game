@@ -134,7 +134,7 @@ ul {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    background-color: var(--clr-grey-2);
+    
     color: var(--clr-white);
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -146,10 +146,24 @@ font-size: 2rem;
 
 .undo-container{
     text-align: center;
+    background-color: rgba(0, 191, 255, 0.7);
+    padding: 0.4rem;
+    text-align: center;
+    font-size: 0.875rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+.undo-container:hover{
+    background-color: rgba(0, 191, 255, 0.4);
 }
 .players{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -157,6 +171,17 @@ font-size: 2rem;
     background-color: var(--clr-grey-2);
     padding: 1rem;
     color: var(--clr-white);
+    display: flex;
+    font-weight: bold;
+    font-size: 0.875rem;
+}
+
+.timer{
+    color:rgba(0, 191, 255, 0.7);
+}
+
+.player:first-child{
+    border-right: 0.3rem solid green;
 }
 
 
@@ -170,6 +195,20 @@ font-size: 2rem;
     min-height: 100vh;
     background-color: var(--clr-grey-1);
     gap: 2rem;
+}
+
+.game header{
+    padding: 1rem;
+    width: 60%;
+    text-align: center;
+    border-bottom:0.5rem solid rgba(0, 191, 255, 0.7);
+}
+
+header h1 {
+    font-size: 2rem;
+    color: var(--clr-primary-10);
+    text-transform: capitalize;
+    text-shadow: 2px 2px 5px rgba(0, 191, 255, 0.7);
 }
 
 .game-info {
