@@ -97,6 +97,7 @@ function Board({ xIsNext, squares, onPlay }) {
 	return (
 		<>
 			<div className='status'>{status}</div>
+			<GameTimer />
 			<div className='board-row'>
 				<Square value={squares[0]} onSquareClick={() => handleClick(0)} />
 				<Square value={squares[1]} onSquareClick={() => handleClick(1)} />
@@ -152,7 +153,6 @@ export default function Game() {
 				<h1>Tic tac toe game</h1>
 			</header>
 			<div className='game-board'>
-				<GameTimer />
 				<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
 				<GameControl />
 				<div className='game-info'>

@@ -127,7 +127,14 @@ ul {
 }
 
 .status {
-    margin-bottom: 10px;
+   background-color: var(--clr-grey-2);
+   padding: 1rem;
+   width: 100%;
+   border-bottom: 2px solid rgb(36, 80, 82);
+   text-align: center;
+   color: var(--clr-white);
+   font-weight: bold;
+   
 }
 
 .game-undo{
@@ -165,6 +172,7 @@ font-size: 2rem;
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 1rem;
 }
 
 .player{
