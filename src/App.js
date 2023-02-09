@@ -31,17 +31,20 @@ function GameTimer() {
 	);
 }
 
-function GameControl() {
+function GameControl({ onUndo, onRedo, onReset }) {
 	return (
 		<>
 			<div className='game-undo'>
-				<div className='undo-container'>
-					<AiOutlineUndo className='undo-btn' /> <p>undo</p>
-				</div>
-				<div className='reset undo-container'>reset</div>
-				<div className='undo-container'>
-					<AiOutlineRedo className='undo-btn' /> <p>redo</p>
-				</div>
+				<button type='button' className='btn'>
+					<AiOutlineUndo className='btn-control' />
+					undo
+				</button>
+				<button type='button' className='btn' onClick={() => onReset()}>
+					reset
+				</button>
+				<button type='button' className='btn'>
+					<AiOutlineRedo className='btn-control' /> redo
+				</button>
 			</div>
 		</>
 	);
@@ -128,6 +131,18 @@ export default function Game() {
 		setCurrentMove(nextHistory.length - 1);
 	}
 
+	function handleUndo(move) {
+		setCurrentMove(move);
+	}
+	function handleRedo(move) {
+		setCurrentMove(move);
+	}
+
+	function handleReset() {
+		setHistory([Array(9).fill(null)]);
+		setCurrentMove(0);
+	}
+
 	function jumpTo(nextMove) {
 		setCurrentMove(nextMove);
 	}
@@ -146,7 +161,6 @@ export default function Game() {
 			</li>
 		);
 	});
-
 	return (
 		<div className='game'>
 			<header>
@@ -154,7 +168,11 @@ export default function Game() {
 			</header>
 			<div className='game-board'>
 				<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-				<GameControl />
+				<GameControl
+					onUndo={handleUndo}
+					onRedo={handleRedo}
+					onReset={handleReset}
+				/>
 				<div className='game-info'>
 					<ol>{moves}</ol>
 				</div>

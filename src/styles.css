@@ -141,17 +141,15 @@ ul {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    
-    color: var(--clr-white);
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
 
-.undo-btn{
+.btn-control{
 font-size: 2rem;
 }
 
-.undo-container{
+.btn{
     text-align: center;
     background-color: rgba(0, 191, 255, 0.7);
     padding: 0.4rem;
@@ -160,12 +158,14 @@ font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: transparent;
     gap: 0.2rem;
     border-radius: var(--radius);
     cursor: pointer;
     transition: var(--transition);
+    color: var(--clr-white);
 }
-.undo-container:hover{
+.btn:hover{
     background-color: rgba(0, 191, 255, 0.4);
 }
 .players{
