@@ -164,6 +164,7 @@ font-size: 2rem;
     cursor: pointer;
     transition: var(--transition);
     color: var(--clr-white);
+    
 }
 .btn:hover{
     background-color: rgba(0, 191, 255, 0.4);
@@ -221,4 +222,5 @@ header h1 {
 
 .game-info {
     margin-left: 20px;
+    
 }

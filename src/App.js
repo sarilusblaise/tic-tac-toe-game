@@ -31,18 +31,18 @@ function GameTimer() {
 	);
 }
 
-function GameControl({ onUndo, onRedo, onReset }) {
+function GameControl({ onUndo, onRedo, onReset, currentMove }) {
 	return (
 		<>
 			<div className='game-undo'>
-				<button type='button' className='btn'>
+				<button type='button' className='btn' onClick={() => onUndo()}>
 					<AiOutlineUndo className='btn-control' />
 					undo
 				</button>
 				<button type='button' className='btn' onClick={() => onReset()}>
 					reset
 				</button>
-				<button type='button' className='btn'>
+				<button type='button' className='btn' onClick={() => onRedo()}>
 					<AiOutlineRedo className='btn-control' /> redo
 				</button>
 			</div>
@@ -53,14 +53,16 @@ function GameControl({ onUndo, onRedo, onReset }) {
 //component keep all the squares and allow them to communicate each other in order to determine
 //when there is winner : this concept call lifting state in react : that means the state
 //of one or more child is store in a the parent component.
-function Board({ xIsNext, squares, onPlay }) {
+function Board({ xIsNext, squares, onPlay, history }) {
 	const winner = calculateWinner(squares);
 	let status;
 
 	if (winner) {
 		status = "Winner: " + winner;
+	} else if (!winner && history.length <= squares.length) {
+		status = "Next Player: " + (xIsNext ? "X" : "O");
 	} else {
-		status = "Next player: " + (xIsNext ? "X" : "O");
+		status = "draw!";
 	}
 
 	function calculateWinner(arr) {
@@ -131,16 +133,21 @@ export default function Game() {
 		setCurrentMove(nextHistory.length - 1);
 	}
 
-	function handleUndo(move) {
-		setCurrentMove(move);
-	}
-	function handleRedo(move) {
-		setCurrentMove(move);
-	}
-
 	function handleReset() {
 		setHistory([Array(9).fill(null)]);
 		setCurrentMove(0);
+	}
+
+	function handleUndo() {
+		if (currentMove > 0) {
+			setCurrentMove(currentMove - 1);
+		}
+	}
+
+	function handleRedo() {
+		if (currentMove < history.length - 1) {
+			setCurrentMove(currentMove + 1);
+		}
 	}
 
 	function jumpTo(nextMove) {
@@ -167,11 +174,17 @@ export default function Game() {
 				<h1>Tic tac toe game</h1>
 			</header>
 			<div className='game-board'>
-				<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+				<Board
+					xIsNext={xIsNext}
+					squares={currentSquares}
+					onPlay={handlePlay}
+					history={history}
+				/>
 				<GameControl
 					onUndo={handleUndo}
 					onRedo={handleRedo}
 					onReset={handleReset}
+					currentMove={currentMove}
 				/>
 				<div className='game-info'>
 					<ol>{moves}</ol>
