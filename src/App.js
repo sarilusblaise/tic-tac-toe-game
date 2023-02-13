@@ -53,13 +53,13 @@ function GameControl({ onUndo, onRedo, onReset, currentMove }) {
 //component keep all the squares and allow them to communicate each other in order to determine
 //when there is winner : this concept call lifting state in react : that means the state
 //of one or more child is store in a the parent component.
-function Board({ xIsNext, squares, onPlay, history }) {
+function Board({ xIsNext, squares, onPlay, history, currentMove }) {
 	const winner = calculateWinner(squares);
 	let status;
 
 	if (winner) {
 		status = "Winner: " + winner;
-	} else if (!winner && history.length <= squares.length) {
+	} else if (!winner && currentMove < squares.length) {
 		status = "Next Player: " + (xIsNext ? "X" : "O");
 	} else {
 		status = "draw!";
@@ -101,7 +101,9 @@ function Board({ xIsNext, squares, onPlay, history }) {
 
 	return (
 		<>
-			<div className='status'>{status}</div>
+			<div className='status'>
+				<span>{status}</span>
+			</div>
 			<GameTimer />
 			<div className='board-row'>
 				<Square value={squares[0]} onSquareClick={() => handleClick(0)} />
@@ -161,6 +163,7 @@ export default function Game() {
 					squares={currentSquares}
 					onPlay={handlePlay}
 					history={history}
+					currentMove={currentMove}
 				/>
 				<GameControl
 					onUndo={handleUndo}

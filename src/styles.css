@@ -91,9 +91,6 @@ ul {
     width:80px;
 }
 
-.board-row {
-    
-}
 
 .game-board{
     display: flex;
@@ -111,6 +108,13 @@ ul {
    color: var(--clr-white);
    font-weight: bold;
    
+}
+
+.status span{
+    background-color:rgb(29, 42, 53, 0.5);
+    padding: 0.6rem;
+    color: #00FF57;
+    box-shadow:3px 3px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
 .game-undo{
