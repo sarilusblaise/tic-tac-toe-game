@@ -37,7 +37,6 @@
 body {
     font-family: sans-serif;
     padding: 0;
-    background-color: var(--clr-grey-0);
 }
 
 h1 {
@@ -162,9 +161,9 @@ font-size: 2rem;
     color: var(--clr-white);
     display: flex;
     font-weight: bold;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    width: 50%;
 }
-
 .timer{
     color:rgba(0, 191, 255, 0.7);
 }

@@ -14,17 +14,17 @@ function Square({ value, onSquareClick }) {
 	);
 }
 
-function GameTimer() {
+function GameTimer({ formatX, formatO }) {
 	return (
 		<div className='players'>
 			<div className='player'>
 				<p>
-					Player X <span className='timer'> 5:30</span>
+					Player X <span className='timer'>{formatX}</span>
 				</p>
 			</div>
 			<div className='player'>
 				<p>
-					Player O <span className='timer'> 5:30</span>
+					Player O <span className='timer'>{formatO}</span>
 				</p>
 			</div>
 		</div>
@@ -54,6 +54,14 @@ function GameControl({ onUndo, onRedo, onReset, currentMove }) {
 //when there is winner : this concept call lifting state in react : that means the state
 //of one or more child is store in a the parent component.
 function Board({ xIsNext, squares, onPlay, history, currentMove }) {
+	const [timerX, setTimerX] = useState(300);
+	const [timerO, setTimerO] = useState(300);
+	const formatTimerX = `${Math.floor(timerX / 60)}:0${
+		((timerX / 60) % 1) * 60
+	}`;
+	const formatTimerO = `${Math.floor(timerO / 60)}:0${
+		((timerO / 60) % 1) * 60
+	}`;
 	const winner = calculateWinner(squares);
 	let status;
 
@@ -104,7 +112,7 @@ function Board({ xIsNext, squares, onPlay, history, currentMove }) {
 			<div className='status'>
 				<span>{status}</span>
 			</div>
-			<GameTimer />
+			<GameTimer formatX={formatTimerX} formatO={formatTimerO} />
 			<div className='board-row'>
 				<Square value={squares[0]} onSquareClick={() => handleClick(0)} />
 				<Square value={squares[1]} onSquareClick={() => handleClick(1)} />
