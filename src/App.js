@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AiFillForward } from "react-icons/ai";
 import { AiFillBackward } from "react-icons/ai";
 import { AiOutlineUndo } from "react-icons/ai";
@@ -56,12 +56,16 @@ function GameControl({ onUndo, onRedo, onReset, currentMove }) {
 function Board({ xIsNext, squares, onPlay, history, currentMove }) {
 	const [timerX, setTimerX] = useState(300);
 	const [timerO, setTimerO] = useState(300);
-	const formatTimerX = `${Math.floor(timerX / 60)}:0${
-		((timerX / 60) % 1) * 60
-	}`;
-	const formatTimerO = `${Math.floor(timerO / 60)}:0${
-		((timerO / 60) % 1) * 60
-	}`;
+	let intervalIdX = useRef();
+	let intervalIdO = useRef();
+	const formatTimerX = `${Math.floor(timerX / 60)}:0${(
+		((timerX / 60) % 1) *
+		60
+	).toFixed()}`;
+	const formatTimerO = `${Math.floor(timerO / 60)}:0${(
+		((timerO / 60) % 1) *
+		60
+	).toFixed()}`;
 	const winner = calculateWinner(squares);
 	let status;
 
@@ -101,8 +105,16 @@ function Board({ xIsNext, squares, onPlay, history, currentMove }) {
 		const nextSquares = squares.slice();
 		if (xIsNext) {
 			nextSquares[i] = "X";
+			intervalIdO.current = setInterval(() => {
+				setTimerO((timer) => timer - 1);
+			}, 1000);
+			clearInterval(intervalIdX.current);
 		} else {
 			nextSquares[i] = "O";
+			intervalIdX.current = setInterval(() => {
+				setTimerX((timer) => timer - 1);
+			}, 1000);
+			clearInterval(intervalIdO.current);
 		}
 		onPlay(nextSquares);
 	}
