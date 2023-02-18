@@ -1,4 +1,4 @@
-function GameTimer({ formatX, formatO }) {
+export default function GameTimer({ formatX, formatO }) {
 	return (
 		<div className='players'>
 			<div className='player'>

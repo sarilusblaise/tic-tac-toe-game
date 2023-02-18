@@ -1,3 +1,5 @@
+import { useState, useRef } from "react";
+import GameTimer from "./GameTimer";
 //square component represent the container for the move of each player.
 function Square({ value, onSquareClick }) {
 	return (
@@ -10,7 +12,13 @@ function Square({ value, onSquareClick }) {
 //component keep all the squares and allow them to communicate each other in order to determine
 //when there is winner : this concept call lifting state in react : that means the state
 //of one or more child is store in a the parent component.
-function Board({ xIsNext, squares, onPlay, history, currentMove }) {
+export default function Board({
+	xIsNext,
+	squares,
+	onPlay,
+	history,
+	currentMove,
+}) {
 	const [timerX, setTimerX] = useState(300);
 	const [timerO, setTimerO] = useState(300);
 	let intervalIdX = useRef();

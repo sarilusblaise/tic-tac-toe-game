@@ -1,4 +1,7 @@
-function GameControl({ onUndo, onRedo, onReset, currentMove }) {
+import { AiOutlineUndo } from "react-icons/ai";
+import { AiOutlineRedo } from "react-icons/ai";
+
+export default function GameControl({ onUndo, onRedo, onReset, currentMove }) {
 	return (
 		<>
 			<div className='game-undo'>

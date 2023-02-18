@@ -1,6 +1,4 @@
 import { useState, useRef } from "react";
-import { AiFillForward } from "react-icons/ai";
-import { AiFillBackward } from "react-icons/ai";
 import { AiOutlineUndo } from "react-icons/ai";
 import { AiOutlineRedo } from "react-icons/ai";
 import mouseCartoon from "./mouseCartoon.png";
