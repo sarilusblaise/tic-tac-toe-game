@@ -172,9 +172,10 @@ font-size: 2rem;
 .timer{
     color:rgba(20, 191, 255);
     background-color: hsl(211, 49%, 53%, 0.3);
-    padding:0.1rem;
+    padding:0.2rem;
     width:60%;
     text-align: center;
+    border-radius: 0.2rem;
 }
 
 .player:first-child{
