@@ -1,3 +1,15 @@
 const GameReducer = (state, action) => {};
 
-export default reducer;
+export default function reducer(history, action) {
+	if (action.type === "play") {
+	}
+
+	if (action.type === "undo") {
+	}
+
+	if (action.type === "redo") {
+	}
+
+	if (action.type === "reset") {
+	}
+}

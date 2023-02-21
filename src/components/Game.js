@@ -7,6 +7,7 @@ export default function Game() {
 	const [currentMove, setCurrentMove] = useState(0);
 	const currentSquares = history[currentMove];
 	const xIsNext = currentMove % 2 === 0; // square with even number have to be always true
+
 	function handlePlay(nextSquares) {
 		const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
 		setHistory(nextHistory);
