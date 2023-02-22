@@ -4,12 +4,13 @@ import GameReducer from "./GameReducer";
 const GameContext = createContext(null);
 const initialHistory = [Array(9).fill(null)];
 export default function GameProvider({ children }) {
-	const [history, dispatch] = useReducer(GameReducer, initialHistory);
-	const [currentMove, setCurrentMove] = useState();
+	const [history, dispatch] = useState(initialHistory);
+	const [currentMove, setCurrentMove] = useReducer(GameReducer, 0);
+	const currentSquares = history[currentMove];
 	const xIsNext = currentMove % 2 === 0;
 
-	const handleMove = () => {
-		dispatch({ type: "play" });
+	const handleMove = (nextHistory) => {
+		dispatch({ type: "move", payload: nextHistory });
 	};
 
 	const handleUndo = () => {
@@ -33,6 +34,7 @@ export default function GameProvider({ children }) {
 				handleReset,
 				currentMove,
 				setCurrentMove,
+				currentSquares,
 			}}
 		>
 			{children}

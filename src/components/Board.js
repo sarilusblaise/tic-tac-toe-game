@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { useGlobalContext } from "../GameContext";
+
 import GameTimer from "./GameTimer";
 //square component represent the container for the move of each player.
 function Square({ value, onSquareClick }) {
