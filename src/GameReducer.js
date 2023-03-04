@@ -23,8 +23,7 @@ export function calculateWinner(arr) {
 export default function GameReducer(gameState, action) {
 	if (action.type === 'move') {
 		const { i } = action.payload;
-		const { history, currentMove } = gameState;
-		let { status } = gameState;
+		let { history, currentMove, status } = gameState;
 		let currentSquares = history[currentMove];
 		let nextSquares = currentSquares.slice();
 		let xIsNext = currentMove % 2 === 0;
@@ -47,7 +46,8 @@ export default function GameReducer(gameState, action) {
 			clearInterval(idX);*/
 		}
 		const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-		return { ...gameState, history: nextHistory, currentMove: i, status };
+		currentMove = nextHistory.length - 1;
+		return { ...gameState, history: nextHistory, currentMove, status };
 	}
 
 	if (action.type === 'undo') {

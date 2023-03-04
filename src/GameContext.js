@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useRef, useReducer } from 'react';
+import { createContext, useContext, useState, useReducer } from 'react';
 import GameReducer from './GameReducer';
 
 const initialState = {
@@ -14,8 +14,6 @@ export default function GameProvider({ children }) {
 	const [gameState, dispatch] = useReducer(GameReducer, initialState);
 	const [timerX, setTimerX] = useState(300);
 	const [timerO, setTimerO] = useState(300);
-	const { history, currentMove } = gameState;
-	const currentSquares = history[currentMove];
 	const formatTimerX = `${Math.floor(timerX / 60)}:0${(
 		((timerX / 60) % 1) *
 		60
@@ -51,7 +49,6 @@ export default function GameProvider({ children }) {
 				handleReset,
 				formatTimerX,
 				formatTimerO,
-				currentSquares,
 			}}
 		>
 			{children}

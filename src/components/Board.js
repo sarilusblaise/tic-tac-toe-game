@@ -15,9 +15,10 @@ function Square({ value, onSquareClick }) {
 //when there is winner : this concept call lifting state in react : that means the state
 //of one or more child is store in a the parent component.
 export default function Board() {
-	const { handleMove, gameState, currentSquares } = useGlobalContext();
+	const { handleMove, gameState } = useGlobalContext();
 
-	const { status } = gameState;
+	const { status, currentMove, history } = gameState;
+	const updatedSquares = history[currentMove];
 	return (
 		<>
 			<div className='status'>
@@ -25,19 +26,19 @@ export default function Board() {
 			</div>
 			<GameTimer />
 			<div className='board-row'>
-				<Square value={currentSquares[0]} onSquareClick={() => handleMove(0)} />
-				<Square value={currentSquares[1]} onSquareClick={() => handleMove(1)} />
-				<Square value={currentSquares[2]} onSquareClick={() => handleMove(2)} />
+				<Square value={updatedSquares[0]} onSquareClick={() => handleMove(0)} />
+				<Square value={updatedSquares[1]} onSquareClick={() => handleMove(1)} />
+				<Square value={updatedSquares[2]} onSquareClick={() => handleMove(2)} />
 			</div>
 			<div className='board-row'>
-				<Square value={currentSquares[3]} onSquareClick={() => handleMove(3)} />
-				<Square value={currentSquares[4]} onSquareClick={() => handleMove(4)} />
-				<Square value={currentSquares[5]} onSquareClick={() => handleMove(5)} />
+				<Square value={updatedSquares[3]} onSquareClick={() => handleMove(3)} />
+				<Square value={updatedSquares[4]} onSquareClick={() => handleMove(4)} />
+				<Square value={updatedSquares[5]} onSquareClick={() => handleMove(5)} />
 			</div>
 			<div className='board-row'>
-				<Square value={currentSquares[6]} onSquareClick={() => handleMove(6)} />
-				<Square value={currentSquares[7]} onSquareClick={() => handleMove(7)} />
-				<Square value={currentSquares[8]} onSquareClick={() => handleMove(8)} />
+				<Square value={updatedSquares[6]} onSquareClick={() => handleMove(6)} />
+				<Square value={updatedSquares[7]} onSquareClick={() => handleMove(7)} />
+				<Square value={updatedSquares[8]} onSquareClick={() => handleMove(8)} />
 			</div>
 		</>
 	);
