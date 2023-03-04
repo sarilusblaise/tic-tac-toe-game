@@ -1,9 +1,12 @@
 import Game from "./components/Game";
+import GameProvider from "./GameContext";
 
 export default function App() {
 	return (
-		<div className='game'>
-			<Game />
-		</div>
+		<GameProvider>
+			<div className='game'>
+				<Game />
+			</div>
+		</GameProvider>
 	);
 }
