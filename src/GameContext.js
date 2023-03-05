@@ -19,17 +19,17 @@ export default function GameProvider({ children }) {
 	const { currentMove } = gameState;
 
 	const handleMove = (i) => {
-		const xIsNext = currentMove % 2;
+		const xIsNext = currentMove % 2 === 0;
 		if (xIsNext) {
-			intervalORef.current = setInterval(() => {
+			intervalXRef.current = setInterval(() => {
 				setTimerO((timer) => timer - 1);
 			}, 1000);
-			clearInterval(intervalXRef.current);
+			clearInterval(intervalORef.current);
 		} else {
 			intervalORef.current = setInterval(() => {
 				setTimerX((timer) => timer - 1);
 			}, 1000);
-			clearInterval(intervalORef.current);
+			clearInterval(intervalXRef.current);
 		}
 		dispatch({ type: 'move', payload: i });
 	};
