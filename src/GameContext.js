@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useReducer, useRef } from 'react';
 import GameReducer from './GameReducer';
+import { calculateWinner } from './GameReducer';
 
 const initialState = {
 	history: [Array(9).fill(null)],
@@ -16,43 +17,74 @@ export default function GameProvider({ children }) {
 	const [timerO, setTimerO] = useState(300);
 	const intervalXRef = useRef();
 	const intervalORef = useRef();
-	const { currentMove } = gameState;
+	const { currentMove, history } = gameState;
+	const winner = calculateWinner(history[currentMove]);
+	const xIsNext = currentMove % 2 === 0;
 
 	const handleMove = (i) => {
-		const xIsNext = currentMove % 2 === 0;
-		if (xIsNext) {
-			intervalXRef.current = setInterval(() => {
-				setTimerO((timer) => timer - 1);
-			}, 1000);
-			clearInterval(intervalORef.current);
-		} else {
-			intervalORef.current = setInterval(() => {
-				setTimerX((timer) => timer - 1);
-			}, 1000);
-			clearInterval(intervalXRef.current);
+		if (!winner) {
+			if (xIsNext) {
+				intervalXRef.current = setInterval(() => {
+					setTimerO((timer) => timer - 1);
+				}, 1000);
+				clearInterval(intervalORef.current);
+			} else if (!xIsNext) {
+				intervalORef.current = setInterval(() => {
+					setTimerX((timer) => timer - 1);
+				}, 1000);
+				clearInterval(intervalXRef.current);
+			}
+			dispatch({ type: 'move', payload: i });
 		}
-		dispatch({ type: 'move', payload: i });
 	};
 
 	const handleUndo = () => {
+		if (currentMove > 0) {
+			if (xIsNext) {
+				intervalXRef.current = setInterval(() => {
+					setTimerO((timer) => timer - 1);
+				}, 1000);
+				clearInterval(intervalORef.current);
+			} else if (!xIsNext) {
+				intervalORef.current = setInterval(() => {
+					setTimerX((timer) => timer - 1);
+				}, 1000);
+				clearInterval(intervalXRef.current);
+			}
+		}
 		dispatch({ type: 'undo' });
 	};
 
-	const handleRedo = (historyLength) => {
-		dispatch({ type: 'redo', payload: historyLength });
+	const handleRedo = () => {
+		if (currentMove < history.length - 1) {
+			if (xIsNext) {
+				intervalXRef.current = setInterval(() => {
+					setTimerO((timer) => timer - 1);
+				}, 1000);
+				clearInterval(intervalORef.current);
+			} else if (!xIsNext) {
+				intervalORef.current = setInterval(() => {
+					setTimerX((timer) => timer - 1);
+				}, 1000);
+				clearInterval(intervalXRef.current);
+			}
+		}
+		dispatch({ type: 'redo' });
 	};
 
 	const handleReset = () => {
+		setTimerX(300);
+		setTimerO(300);
+		clearInterval(intervalORef.current);
+		clearInterval(intervalXRef.current);
 		dispatch({ type: 'reset' });
 	};
-	const formatTimerX = `${Math.floor(timerX / 60)}:0${(
-		((timerX / 60) % 1) *
-		60
-	).toFixed()}`;
-	const formatTimerO = `${Math.floor(timerO / 60)}:0${(
-		((timerO / 60) % 1) *
-		60
-	).toFixed()}`;
+	const formatTimerX = `${Math.floor(timerX / 60)}:${(((timerX / 60) % 1) * 60)
+		.toFixed()
+		.padStart(2, 0)}`;
+	const formatTimerO = `${Math.floor(timerO / 60)}:${(((timerO / 60) % 1) * 60)
+		.toFixed()
+		.padStart(2, 0)}`;
 
 	return (
 		<GameContext.Provider

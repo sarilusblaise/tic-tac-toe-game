@@ -42,21 +42,28 @@ export default function GameReducer(gameState, action) {
 	}
 
 	if (action.type === 'undo') {
-		const { currentMove } = gameState;
+		let { currentMove } = gameState;
 		if (currentMove > 0) {
-			return currentMove - 1;
+			currentMove = currentMove - 1;
+			return { ...gameState, currentMove };
 		}
-		return currentMove;
+		return gameState;
 	}
 
 	if (action.type === 'redo') {
-		let { currentMove } = gameState;
-		if (currentMove < action.payload - 1) {
-			return currentMove + 1;
+		let { currentMove, history } = gameState;
+		if (currentMove < history.length - 1) {
+			currentMove = currentMove + 1;
+			return { ...gameState, currentMove };
 		}
-		return currentMove;
+		return gameState;
 	}
 
 	if (action.type === 'reset') {
+		return {
+			history: [Array(9).fill(null)],
+			currentMove: 0,
+			status: 'Next Player: X',
+		};
 	}
 }
