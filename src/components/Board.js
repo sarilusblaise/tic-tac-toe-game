@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useGlobalContext } from '../GameContext';
+import { calculateWinner } from '../GameReducer';
 
 import GameTimer from './GameTimer';
 //square component represent the container for the move of each player.
@@ -16,9 +17,18 @@ function Square({ value, onSquareClick }) {
 //of one or more child is store in a the parent component.
 export default function Board() {
 	const { handleMove, gameState } = useGlobalContext();
-
-	const { status, currentMove, history } = gameState;
+	const { currentMove, history } = gameState;
 	const updatedSquares = history[currentMove];
+	let xIsNext = currentMove % 2 === 0;
+	const winner = calculateWinner(updatedSquares);
+	let status;
+	if (winner) {
+		status = 'Winner: ' + winner;
+	} else if (!winner && currentMove < updatedSquares.length) {
+		status = 'Next Player: ' + (xIsNext ? 'X' : 'O');
+	} else {
+		status = 'draw!';
+	}
 	return (
 		<>
 			<div className='status'>

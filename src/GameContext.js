@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useReducer } from 'react';
+import { createContext, useContext, useState, useReducer, useRef } from 'react';
 import GameReducer from './GameReducer';
 
 const initialState = {
@@ -14,17 +14,24 @@ export default function GameProvider({ children }) {
 	const [gameState, dispatch] = useReducer(GameReducer, initialState);
 	const [timerX, setTimerX] = useState(300);
 	const [timerO, setTimerO] = useState(300);
-	const formatTimerX = `${Math.floor(timerX / 60)}:0${(
-		((timerX / 60) % 1) *
-		60
-	).toFixed()}`;
-	const formatTimerO = `${Math.floor(timerO / 60)}:0${(
-		((timerO / 60) % 1) *
-		60
-	).toFixed()}`;
+	const intervalXRef = useRef();
+	const intervalORef = useRef();
+	const { currentMove } = gameState;
 
 	const handleMove = (i) => {
-		dispatch({ type: 'move', payload: { i, setTimerO, setTimerX } });
+		const xIsNext = currentMove % 2;
+		if (xIsNext) {
+			intervalORef.current = setInterval(() => {
+				setTimerO((timer) => timer - 1);
+			}, 1000);
+			clearInterval(intervalXRef.current);
+		} else {
+			intervalORef.current = setInterval(() => {
+				setTimerX((timer) => timer - 1);
+			}, 1000);
+			clearInterval(intervalORef.current);
+		}
+		dispatch({ type: 'move', payload: i });
 	};
 
 	const handleUndo = () => {
@@ -38,6 +45,14 @@ export default function GameProvider({ children }) {
 	const handleReset = () => {
 		dispatch({ type: 'reset' });
 	};
+	const formatTimerX = `${Math.floor(timerX / 60)}:0${(
+		((timerX / 60) % 1) *
+		60
+	).toFixed()}`;
+	const formatTimerO = `${Math.floor(timerO / 60)}:0${(
+		((timerO / 60) % 1) *
+		60
+	).toFixed()}`;
 
 	return (
 		<GameContext.Provider
@@ -49,6 +64,8 @@ export default function GameProvider({ children }) {
 				handleReset,
 				formatTimerX,
 				formatTimerO,
+				setTimerO,
+				setTimerX,
 			}}
 		>
 			{children}
