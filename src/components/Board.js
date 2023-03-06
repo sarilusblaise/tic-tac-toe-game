@@ -1,8 +1,11 @@
-import { useState, useRef } from 'react';
 import { useGlobalContext } from '../GameContext';
 import { calculateWinner } from '../GameReducer';
+import { v4 as uuidv4 } from 'uuid';
 
 import GameTimer from './GameTimer';
+
+//function for generating array in specific range
+
 //square component represent the container for the move of each player.
 function Square({ value, onSquareClick }) {
 	return (
@@ -38,27 +41,26 @@ export default function Board() {
 	} else {
 		status = 'draw!';
 	}
+	const generateRowSquares = (arr) => {
+		return arr.map((i) => {
+			return (
+				<Square
+					key={uuidv4()}
+					value={updatedSquares[i]}
+					onSquareClick={() => handleMove(i)}
+				/>
+			);
+		});
+	};
 	return (
 		<>
 			<div className='status'>
 				<span>{status}</span>
 			</div>
 			<GameTimer />
-			<div className='board-row'>
-				<Square value={updatedSquares[0]} onSquareClick={() => handleMove(0)} />
-				<Square value={updatedSquares[1]} onSquareClick={() => handleMove(1)} />
-				<Square value={updatedSquares[2]} onSquareClick={() => handleMove(2)} />
-			</div>
-			<div className='board-row'>
-				<Square value={updatedSquares[3]} onSquareClick={() => handleMove(3)} />
-				<Square value={updatedSquares[4]} onSquareClick={() => handleMove(4)} />
-				<Square value={updatedSquares[5]} onSquareClick={() => handleMove(5)} />
-			</div>
-			<div className='board-row'>
-				<Square value={updatedSquares[6]} onSquareClick={() => handleMove(6)} />
-				<Square value={updatedSquares[7]} onSquareClick={() => handleMove(7)} />
-				<Square value={updatedSquares[8]} onSquareClick={() => handleMove(8)} />
-			</div>
+			<div className='board-row'>{generateRowSquares([0, 1, 2])}</div>
+			<div className='board-row'>{generateRowSquares([3, 4, 5])}</div>
+			<div className='board-row'>{generateRowSquares([6, 7, 8])}</div>
 		</>
 	);
 }

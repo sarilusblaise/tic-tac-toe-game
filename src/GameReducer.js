@@ -13,7 +13,7 @@ export function calculateWinner(arr) {
 	for (let line of lines) {
 		const [a, b, c] = line;
 		if (arr[a] && arr[a] === arr[b] && arr[a] === arr[c]) {
-			return arr[a];
+			return line;
 		}
 	}
 
