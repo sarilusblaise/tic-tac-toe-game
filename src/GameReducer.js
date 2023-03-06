@@ -63,7 +63,6 @@ export default function GameReducer(gameState, action) {
 		return {
 			history: [Array(9).fill(null)],
 			currentMove: 0,
-			status: 'Next Player: X',
 		};
 	}
 }

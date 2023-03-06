@@ -16,13 +16,22 @@ function Square({ value, onSquareClick }) {
 //when there is winner : this concept call lifting state in react : that means the state
 //of one or more child is store in a the parent component.
 export default function Board() {
-	const { handleMove, gameState, resetTimer } = useGlobalContext();
+	const { handleMove, gameState, timerX, timerO, intervalORef, intervalXRef } =
+		useGlobalContext();
 	const { currentMove, history } = gameState;
 	const updatedSquares = history[currentMove];
 	let xIsNext = currentMove % 2 === 0;
 	const winner = calculateWinner(updatedSquares);
 	let status;
-	if (winner) {
+	if (timerX === 0) {
+		status = 'winner: O';
+		clearInterval(intervalORef.current);
+		clearInterval(intervalXRef.current);
+	} else if (timerO === 0) {
+		status = 'winner: X';
+		clearInterval(intervalORef.current);
+		clearInterval(intervalXRef.current);
+	} else if (winner) {
 		status = 'Winner: ' + winner;
 	} else if (!winner && currentMove < updatedSquares.length) {
 		status = 'Next Player: ' + (xIsNext ? 'X' : 'O');

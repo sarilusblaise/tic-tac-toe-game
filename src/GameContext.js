@@ -5,7 +5,6 @@ import { calculateWinner } from './GameReducer';
 const initialState = {
 	history: [Array(9).fill(null)],
 	currentMove: 0,
-	status: 'Next Player: X',
 };
 const GameContext = createContext(null);
 //const initialHistory = [Array(9).fill(null)];
@@ -22,7 +21,7 @@ export default function GameProvider({ children }) {
 	const xIsNext = currentMove % 2 === 0;
 
 	const handleMove = (i) => {
-		if (!winner) {
+		if (!winner && !history[currentMove][i] && timerO !== 0 && timerX !== 0) {
 			if (xIsNext) {
 				intervalXRef.current = setInterval(() => {
 					setTimerO((timer) => timer - 1);
@@ -98,6 +97,10 @@ export default function GameProvider({ children }) {
 				formatTimerO,
 				setTimerO,
 				setTimerX,
+				timerX,
+				timerO,
+				intervalXRef,
+				intervalORef,
 			}}
 		>
 			{children}
