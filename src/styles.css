@@ -91,7 +91,9 @@ ul {
     width:80px;
     font-family: 'Oooh Baby', cursive;
 }
-
+.bg-winner{
+    background-color: #00FF57 !important;
+}
 
 .game-board{
     display: flex;

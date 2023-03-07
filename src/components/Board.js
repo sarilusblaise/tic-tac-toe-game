@@ -7,9 +7,9 @@ import GameTimer from './GameTimer';
 //function for generating array in specific range
 
 //square component represent the container for the move of each player.
-function Square({ value, onSquareClick }) {
+function Square({ value, onSquareClick, squareClassName }) {
 	return (
-		<button className='square' onClick={onSquareClick}>
+		<button className={squareClassName} onClick={onSquareClick}>
 			{value}
 		</button>
 	);
@@ -35,19 +35,25 @@ export default function Board() {
 		clearInterval(intervalORef.current);
 		clearInterval(intervalXRef.current);
 	} else if (winner) {
-		status = 'Winner: ' + winner;
+		status = 'Winner: ' + history[currentMove][winner[0]];
 	} else if (!winner && currentMove < updatedSquares.length) {
 		status = 'Next Player: ' + (xIsNext ? 'X' : 'O');
 	} else {
 		status = 'draw!';
 	}
 	const generateRowSquares = (arr) => {
-		return arr.map((i) => {
+		return arr.map((i, index) => {
+			const squareClasses = !winner
+				? 'square'
+				: winner.includes(i)
+				? 'square bg-winner'
+				: 'square';
 			return (
 				<Square
 					key={uuidv4()}
 					value={updatedSquares[i]}
 					onSquareClick={() => handleMove(i)}
+					squareClassName={squareClasses}
 				/>
 			);
 		});
