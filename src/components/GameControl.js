@@ -12,7 +12,7 @@ export default function GameControl() {
 					undo
 				</button>
 				<button type='button' className='btn' onClick={() => handleReset()}>
-					reset
+					restart
 				</button>
 				<button type='button' className='btn' onClick={() => handleRedo()}>
 					<AiOutlineRedo className='btn-control' /> redo
