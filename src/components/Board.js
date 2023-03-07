@@ -36,6 +36,8 @@ export default function Board() {
 		clearInterval(intervalXRef.current);
 	} else if (winner) {
 		status = 'Winner: ' + history[currentMove][winner[0]];
+		clearInterval(intervalORef.current);
+		clearInterval(intervalXRef.current);
 	} else if (!winner && currentMove < updatedSquares.length) {
 		status = 'Next Player: ' + (xIsNext ? 'X' : 'O');
 	} else {
