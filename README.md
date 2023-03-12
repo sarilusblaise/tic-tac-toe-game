@@ -1,3 +1,13 @@
+
+# Tic-tac-toe game
+The game allows two players to take turns marking the spaces in a 3x3 grid. The first player to get three marks in a row (horizontally, vertically, or diagonally) wins the game.
+
+# Built with
+- React 
+- ESlint
+- CSS
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
