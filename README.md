@@ -7,10 +7,20 @@ The game allows two players to take turns marking the spaces in a 3x3 grid. The 
 - ESlint
 - CSS
 
+# Getting Started
+To get started with this project, follow the instructions below :
 
+Clone the project using git clone or just copy the command below:
+```bash
+git clone https://github.com/sarilusblaise/tic-tac-toe-game
+```
+# Live demo
+[click here](https://mytic-tac-toe-game.netlify.app/)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
 
 ## Available Scripts
 
@@ -78,3 +88,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Author 
+* LinkedIn: <a href="https://www.linkedin.com/in/sarilusblaise/" target="_blank">sarilusblaise</a>
+* GitHub: <a href="https://github.com/sarilusblaise" target="_blank">sarilusblaise</a>
+* Twitter: <a href="https://twitter.com/sarilusblaise" target="_blank">sarilusblaise</a>
+  
+
+# Contributing
+Contributions, issues, and feature requests are welcome!
+Feel free to check the [issues page](https://github.com/sarilusblaise/tic-tac-toe-game/issues).
