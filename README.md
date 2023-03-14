@@ -14,6 +14,9 @@ Clone the project using git clone or just copy the command below:
 ```bash
 git clone https://github.com/sarilusblaise/tic-tac-toe-game
 ```
+Open the project with your favorite code editor 
+
+Run `npm install` install to get the dependencies
 # Live demo
 [click here](https://mytic-tac-toe-game.netlify.app/)
 # Getting Started with Create React App
