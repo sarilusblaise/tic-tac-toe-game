@@ -10,13 +10,13 @@ The game allows two players to take turns marking the spaces in a 3x3 grid. The 
 # Getting Started
 To get started with this project, follow the instructions below :
 
-Clone the project using git clone or just copy the command below:
+1. Clone the project using git clone or just copy the command below:
 ```bash
 git clone https://github.com/sarilusblaise/tic-tac-toe-game
 ```
-Open the project with your favorite code editor 
+ 2. Open the project with your favorite code editor 
 
-Run `npm install` install to get the dependencies
+ 3. Run `npm install` install to get the dependencies
 # Live demo
 [click here](https://mytic-tac-toe-game.netlify.app/)
 # Getting Started with Create React App
